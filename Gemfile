@@ -1,18 +1,17 @@
 source 'https://rubygems.org'
+ruby File.read('.ruby-version').strip
 
 gem 'httparty'
 gem 'openssl'
 
-# bundle --without development
-group :development do
-  gem 'pry', require: false             # An alternative IRB console
-  gem 'pry-bond', require: false        # Input completion in pry console
-  gem 'pry-byebug', require: false      # Adds step, next, continue & break
-  gem 'pry-highlight', require: false   # Highlight and prettify console output
-  gem 'pry-rails'                       # Use Pry as your rails console
-end
+# bundle --without development --without tests
+gem 'pry', group: %i[development tests], require: true
+gem 'pry-byebug', group: %i[development tests], require: false
+gem 'pry-rails', group: %i[development tests], require: true
 
 # bundle --without tests
 group :tests do
-  gem 'rubocop', require: false         # Static code analyzer
+  gem 'rubocop', require: false             # Static code analyser
+  gem 'rubocop-performance', require: false # Performance optimization analysis
+  gem 'simplecov', require: false           # Code coverage report generator
 end
